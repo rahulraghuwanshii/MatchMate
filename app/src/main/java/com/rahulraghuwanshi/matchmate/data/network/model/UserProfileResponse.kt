@@ -9,5 +9,5 @@ data class UserProfileResponse(
     @SerialName("info")
     val info: Info? = null,
     @SerialName("results")
-    val results: List<Result>? = null
+    val userDetails: List<UserDetails>? = null
 )

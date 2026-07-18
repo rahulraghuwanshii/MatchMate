@@ -1,11 +1,14 @@
 package com.rahulraghuwanshi.matchmate.data.network.model
 
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+@Entity(tableName = "userProfileTables")
 @Serializable
-data class Result(
+data class UserDetails(
     @SerialName("cell")
     val cell: String? = null,
     @SerialName("dob")
@@ -15,7 +18,7 @@ data class Result(
     @SerialName("gender")
     val gender: String? = null,
     @SerialName("id")
-    val id: Id? = null,
+    val userId: Id? = null,
     @SerialName("location")
     val location: Location? = null,
     @SerialName("login")
@@ -30,4 +33,8 @@ data class Result(
     val picture: Picture? = null,
     @SerialName("registered")
     val registered: Registered? = null
-)
+) {
+    @SerialName("userId")
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0
+}
