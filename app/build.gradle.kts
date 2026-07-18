@@ -1,6 +1,10 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("kotlin-kapt")
+    id("kotlin-parcelize")
+    id("com.google.dagger.hilt.android")
+    id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 android {
@@ -15,6 +19,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "BASE_URL", "\"https://randomuser.me/\"")
     }
 
     buildTypes {
@@ -33,6 +39,11 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
+    buildFeatures {
+        viewBinding = true
+        buildConfig = true
+    }
 }
 
 dependencies {
@@ -45,4 +56,46 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // for viewmodel
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+
+    // For navigation architecture.
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+
+    // For room db.
+    implementation(libs.androidx.room.runtime)
+//    kapt(libs.androidx.room.compiler)
+//    ksp("androidx.room:room-compiler:$room_version")
+
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.paging)
+
+
+    // for retrofit
+    implementation(libs.retrofit)
+    implementation(libs.logging.interceptor)
+    implementation(libs.retrofit2.kotlinx.serialization.converter)
+
+
+    // for pagination
+    implementation(libs.androidx.paging.runtime.ktx)
+
+    //Glide
+    implementation(libs.glide)
+    kapt(libs.glide.compiler)
+
+    // Hilt
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.navigation.fragment)
+    kapt(libs.dagger.hilt.android.compiler)
+
+    // for kotlin serialization
+    implementation(libs.kotlinx.serialization.json)
+}
+
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
 }
