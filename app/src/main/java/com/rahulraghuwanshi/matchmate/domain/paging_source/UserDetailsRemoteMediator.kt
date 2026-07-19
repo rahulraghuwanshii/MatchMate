@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit
  * where a PagingSource can load it and provide it to the UI to display.
  */
 @OptIn(ExperimentalPagingApi::class)
-class UserProfileRemoteMediator(
+class UserDetailsRemoteMediator(
     private val fetchUserProfileUseCase: FetchUserProfileUseCase,
     private val matchMateDatabase: MatchMateDatabase
 ) : RemoteMediator<Int, UserDetails>() {

@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">MatchMate</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="label_like">LIKE</string>
+    <string name="label_nope">NOPE</string>
+    <string name="card_image_desc">Card image</string>
+    <string name="btn_decline_desc">Decline</string>
+    <string name="btn_accept_desc">Accept</string>
+    <string name="label_online">online</string>
+    <string name="verified_desc">Verified profile</string>
 </resources>

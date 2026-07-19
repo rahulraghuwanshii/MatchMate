@@ -16,12 +16,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 abstract class MatchMateModule {
 
-//    @Provides
-//    @Singleton
-//    fun provideNoteRepository(db: NoteDatabase): NoteRepository {
-//        return NoteRepositoryImpl(db.noteDao)
-//    }
-
     @Binds
     @Singleton
     abstract fun bindMatchMateRemoteDataSource(matchMateRemoteDataSourceImpl: MatchMateRemoteDataSourceImpl): MatchMateRemoteDataSource

@@ -69,8 +69,7 @@ dependencies {
 
     // For room db.
     implementation(libs.androidx.room.runtime)
-//    kapt(libs.androidx.room.compiler)
-//    ksp("androidx.room:room-compiler:$room_version")
+    kapt(libs.androidx.room.compiler)
 
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.paging)
@@ -96,6 +95,8 @@ dependencies {
 
     // for kotlin serialization
     implementation(libs.kotlinx.serialization.json)
+
+    implementation(libs.flexbox)
 }
 
 // Allow references to generated code

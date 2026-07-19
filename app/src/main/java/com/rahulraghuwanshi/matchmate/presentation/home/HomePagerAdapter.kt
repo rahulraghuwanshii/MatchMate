@@ -10,7 +10,7 @@ class HomePagerAdapter(
 ) : FragmentStateAdapter(fragment) {
 
     companion object {
-        private const val NUM_TABS = 2
+        private const val NUM_TABS = 1
     }
 
     override fun getItemCount() = NUM_TABS
