@@ -16,7 +16,6 @@ class SwipeTouchListener(
     private val stampLike: View,
     private val stampNope: View,
     private val swipeThresholdPx: Float,
-    private val networkManager: NetworkManager,
     private val onAccepted: () -> Unit,
     private val onDeclined: () -> Unit
 ) : View.OnTouchListener {
@@ -38,8 +37,6 @@ class SwipeTouchListener(
             }
 
             MotionEvent.ACTION_MOVE -> {
-
-                if (!networkManager.isNetworkAvailable()) return true
 
                 val deltaX = event.rawX - startX
                 val deltaY = event.rawY - startY

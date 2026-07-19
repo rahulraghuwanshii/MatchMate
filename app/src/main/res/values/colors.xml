@@ -3,4 +3,26 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="bg_color">#F7F7F5</color>
+
+    <color name="primary">#FF5A6E</color>
+    <color name="primary_light">#FF7A8A</color>
+    <color name="primary_dark">#E8425A</color>
+
+    <color name="action_like">#22C58B</color>
+    <color name="action_nope">#A9AFBC</color>
+
+    <!-- Neutrals -->
+    <color name="surface">#FFFFFF</color>
+    <color name="background">#F7F7F4</color>
+    <color name="border">#E5E5E0</color>
+    <color name="text_primary">#1E1B22</color>
+    <color name="text_secondary">#6B6874</color>
+    <color name="text_muted">#A9A6B0</color>
+    <color name="text_on_primary">#FFFFFF</color>
+
+    <!-- Status -->
+    <color name="online_dot">#22C58B</color>
+    <color name="verified_badge">#4F9DFF</color>
+    <color name="error">#E8425A</color>
+
 </resources>

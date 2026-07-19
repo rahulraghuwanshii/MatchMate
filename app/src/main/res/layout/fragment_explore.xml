@@ -33,20 +33,22 @@
             android:layout_height="56dp"
             android:layout_marginEnd="24dp"
             android:background="@drawable/circle_button_outline"
+            android:backgroundTint="@color/action_nope"
             android:contentDescription="@string/btn_decline_desc"
             android:padding="14dp"
             android:scaleType="centerInside"
-            android:src="@android:drawable/ic_menu_close_clear_cancel" />
+            android:src="@drawable/ic_cross" />
 
         <ImageButton
             android:id="@+id/btnAccept"
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:background="@drawable/circle_button_outline"
+            android:backgroundTint="@color/action_like"
             android:contentDescription="@string/btn_accept_desc"
             android:padding="14dp"
             android:scaleType="centerInside"
-            android:src="@android:drawable/btn_star_big_on" />
+            android:src="@drawable/ic_heart" />
 
     </LinearLayout>
 

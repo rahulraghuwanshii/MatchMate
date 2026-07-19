@@ -13,10 +13,11 @@ import com.rahulraghuwanshi.matchmate.data.local.converters.type.PictureConverte
 import com.rahulraghuwanshi.matchmate.data.local.converters.type.RegisteredConverter
 import com.rahulraghuwanshi.matchmate.data.local.model.RemoteKeys
 import com.rahulraghuwanshi.matchmate.data.network.model.UserDetails
+import com.rahulraghuwanshi.matchmate.presentation.explore.model.UserData
 
 @Database(
-    entities = [UserDetails::class, RemoteKeys::class],
-    version = 1,
+    entities = [UserDetails::class, RemoteKeys::class,UserData::class],
+    version = 2,
     exportSchema = false
 )
 @TypeConverters(

@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.rahulraghuwanshi.matchmate.data.network.model.UserDetails
+import com.rahulraghuwanshi.matchmate.presentation.explore.model.UserData
 
 @Dao
 interface MatchMateDao {
@@ -17,4 +18,10 @@ interface MatchMateDao {
 
     @Query("DELETE FROM userProfileTables")
     suspend fun clearAllUserDetails()
+
+    @Query("SELECT * FROM userMatchProfileTables")
+    suspend fun getAllMatchedUsers(): List<UserData>?
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertMatchedUsers(userData: UserData)
 }

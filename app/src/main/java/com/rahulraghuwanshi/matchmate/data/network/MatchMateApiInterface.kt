@@ -8,6 +8,6 @@ import retrofit2.http.Query
 interface MatchMateApiInterface {
 
     @GET("api/")
-    suspend fun fetchUserProfile(@Query("page") page: Int): Response<UserProfileResponse?>
+    suspend fun fetchUserProfile(@Query("page") page: Int, @Query("results") results: Int = 2): Response<UserProfileResponse?>
 
 }

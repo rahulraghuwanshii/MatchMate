@@ -2,6 +2,7 @@ package com.rahulraghuwanshi.matchmate.presentation.explore
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -12,8 +13,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.RecyclerView
 import com.rahulraghuwanshi.matchmate.databinding.FragmentExploreBinding
 import com.rahulraghuwanshi.matchmate.presentation.explore.cutom.SwipeStackLayoutManager
-import com.rahulraghuwanshi.matchmate.presentation.explore.model.CardItem
-import com.rahulraghuwanshi.matchmate.presentation.explore.model.toCardItem
+import com.rahulraghuwanshi.matchmate.presentation.explore.model.UserData
+import com.rahulraghuwanshi.matchmate.presentation.explore.model.toUserData
 import com.rahulraghuwanshi.matchmate.presentation.util.NetworkManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -28,7 +29,7 @@ class ExploreFragment : Fragment() {
     private var _binding: FragmentExploreBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var adapter: CardAdapter
+    private lateinit var adapter: ExplorePageAdapter
 
     @Inject
     lateinit var networkManager: NetworkManager
@@ -43,39 +44,53 @@ class ExploreFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentExploreBinding.inflate(inflater, container, false)
-        val view = binding.root
-
-
-        val recyclerView = binding.recyclerCards
-        val btnAccept = binding.btnAccept
-        val btnDecline = binding.btnDecline
-
-        // drag needs to travel ~35% of screen width before it counts as a swipe
-        val swipeThresholdPx = resources.displayMetrics.widthPixels * 0.35f
-
-        adapter = CardAdapter(
-            swipeThresholdPx = swipeThresholdPx,
-            networkManager = networkManager,
-            onAccepted = { item -> handleSwipe(item, accepted = true) },
-            onDeclined = { item -> handleSwipe(item, accepted = false) }
-        )
-
-        recyclerView.layoutManager = SwipeStackLayoutManager(visibleCount = 3)
-        recyclerView.adapter = adapter
-
-        btnAccept.setOnClickListener {
-            animateTopCardOff(recyclerView, accepted = true)
-        }
-        btnDecline.setOnClickListener {
-            animateTopCardOff(recyclerView, accepted = false)
-        }
-
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setUp()
         collectFlow()
+    }
+
+    private fun setUp() {
+        // drag needs to travel ~35% of screen width before it counts as a swipe
+        val swipeThresholdPx = resources.displayMetrics.widthPixels * 0.35f
+
+        adapter = ExplorePageAdapter(
+            swipeThresholdPx = swipeThresholdPx,
+            onAccepted = { item -> handleSwipe(item, accepted = true) },
+            onDeclined = { item -> handleSwipe(item, accepted = false) }
+        )
+
+        binding.recyclerCards.layoutManager = SwipeStackLayoutManager(visibleCount = 3)
+        binding.recyclerCards.adapter = adapter
+
+        binding.btnAccept.setOnClickListener {
+            animateTopCardOff(binding.recyclerCards, accepted = true)
+        }
+        binding.btnDecline.setOnClickListener {
+            animateTopCardOff(binding.recyclerCards, accepted = false)
+        }
+
+        binding.recyclerCards.addOnItemTouchListener(object :
+            RecyclerView.SimpleOnItemTouchListener() {
+
+            override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
+                when (e.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        rv.parent.requestDisallowInterceptTouchEvent(true)
+                    }
+
+                    MotionEvent.ACTION_UP,
+                    MotionEvent.ACTION_CANCEL -> {
+                        rv.parent.requestDisallowInterceptTouchEvent(false)
+                    }
+                }
+                return false
+            }
+        })
+
     }
 
     private fun getData() {
@@ -97,7 +112,7 @@ class ExploreFragment : Fragment() {
      * flight already happened live) or after the button-triggered fly-off
      * animation finishes.
      */
-    private fun handleSwipe(item: CardItem, accepted: Boolean) {
+    private fun handleSwipe(item: UserData, accepted: Boolean) {
         val shouldRefresh = viewModel.markSwiped(item, accepted)
         if (shouldRefresh) {
             // Re-runs the PagingSource; since swipedIds now excludes this
@@ -120,7 +135,7 @@ class ExploreFragment : Fragment() {
             .translationX(targetX)
             .rotation(targetRotation)
             .setDuration(250)
-            .withEndAction { handleSwipe(item.toCardItem(), accepted) }
+            .withEndAction { handleSwipe(item.toUserData(), accepted) }
             .start()
     }
 

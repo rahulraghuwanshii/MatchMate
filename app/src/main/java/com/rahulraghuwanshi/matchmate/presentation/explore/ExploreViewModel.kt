@@ -11,7 +11,8 @@ import com.rahulraghuwanshi.matchmate.data.local.MatchMateDatabase
 import com.rahulraghuwanshi.matchmate.data.network.model.UserDetails
 import com.rahulraghuwanshi.matchmate.domain.paging_source.UserDetailsRemoteMediator
 import com.rahulraghuwanshi.matchmate.domain.use_case.FetchUserProfileUseCase
-import com.rahulraghuwanshi.matchmate.presentation.explore.model.CardItem
+import com.rahulraghuwanshi.matchmate.presentation.explore.model.Matched
+import com.rahulraghuwanshi.matchmate.presentation.explore.model.UserData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -70,8 +71,12 @@ class ExploreViewModel @Inject constructor(
      * swipe and returns whether the caller should trigger adapter.refresh()
      * (it always should here, but this keeps the call site explicit/readable).
      */
-    fun markSwiped(item: CardItem, accepted: Boolean): Boolean {
-        swipedIds.add(item.id)
+    fun markSwiped(userData: UserData, accepted: Boolean): Boolean {
+        viewModelScope.launch {
+            val matcher = if (accepted) Matched.LIKE else Matched.DISLIKE
+            matchMateDatabase.matchMateDao().insertMatchedUsers(userData.copy(matched = matcher))
+        }
+        swipedIds.add(userData.id)
         return true
     }
 }

@@ -2,6 +2,7 @@ package com.rahulraghuwanshi.matchmate.di.db
 
 import android.content.Context
 import androidx.room.Room
+import com.rahulraghuwanshi.matchmate.data.local.MatchMateDao
 import com.rahulraghuwanshi.matchmate.data.local.MatchMateDatabase
 import com.rahulraghuwanshi.matchmate.data.util.AppConstants
 import dagger.Module
@@ -27,5 +28,14 @@ class DbModule {
             AppConstants.DATABASE_NAME
         )
             .build()
+    }
+
+    /**
+     * The method returns the MatchMateDao object
+     * */
+    @Provides
+    @Singleton
+    internal fun provideMatchMateDao(matchMateDatabase: MatchMateDatabase): MatchMateDao {
+        return matchMateDatabase.matchMateDao()
     }
 }
