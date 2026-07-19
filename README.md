@@ -6,14 +6,11 @@ MatchMate is a modern Android dating/networking application built with a focus o
 
 | Explore/Discover Profiles | Matched Profiles |
 | :---: | :---: |
-| <img src="https://github.com/user-attachments/assets/89b3a91c-3f73-445a-82dd-9ee559b9f833" width="300" /> | <img src="https://github.com/user-attachments/assets/7b821ac2-5770-40e9-a1dd-abe6f1b41cc1" width="300" /> |
+| <img src="https://github.com/user-attachments/assets/85484878-3bfc-439e-9ecf-1ce38e782c60" width="300" /> | <img src="https://github.com/user-attachments/assets/3555bad8-be3a-4aa5-930d-1418fc4507fc" width="300" /> |
 
-![image](https://github.com/user-attachments/assets/89b3a91c-3f73-445a-82dd-9ee559b9f833)
-![image](https://github.com/user-attachments/assets/7b821ac2-5770-40e9-a1dd-abe6f1b41cc1)
 
 ### 🎬 Demo Video
-![App Demo](./screenshots/app_demo.gif)
-*(Replace with a link to your video or a GIF)*
+https://github.com/user-attachments/assets/77509c71-038b-4470-b884-384c41a2794d
 
 ---
 
