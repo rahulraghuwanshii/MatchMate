@@ -28,7 +28,6 @@ class ProfileMatchesFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.fetchMatchedUsers()
     }
 
     override fun onCreateView(
@@ -41,6 +40,7 @@ class ProfileMatchesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.fetchMatchedUsers()
         setUp()
         collectFlow()
     }
